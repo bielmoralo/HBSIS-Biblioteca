@@ -1,0 +1,82 @@
+﻿@model HBSIS_Biblioteca.Models.Books.IndexModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h2>Biblioteca - Ponto da Leitura</h2>
+    <p class="lead">Controle aqui todos seus exemplares disponiveis.</p>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-0">
+        @Html.ActionLink("Novo Cadastro", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-default" })
+    </div>
+</div>
+<div class="row">
+
+    @if (@Model.List.Count > 0)
+    {
+
+        <div class="container-fluid">
+            <div class="col-lg-6;" style="margin-top:10px">
+                <table id="TableExport" class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="1" style="text-align: center; ">ID</th>
+
+                            <th colspan="1" style="text-align: center; ">Nome</th>
+
+                            <th colspan="1" style="text-align: center; ">Paginas</th>
+
+                            <th colspan="1" style="text-align: center; ">Autor</th>
+
+                            <th colspan="1" style="text-align: center; ">Quantidade Disponivel</th>
+
+                            <th colspan="1" style="text-align: center; ">Data Registro </th>
+
+                            <th colspan="1" style="text-align: center; ">Data Atualização</th>
+
+                            <th colspan="1" style="text-align: center; ">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="searchable">
+
+                        @for (int i = 0; i < Model.List.Count; i++)
+                        {
+                            <tr>
+                                <td style="text-align: center; color: black">@Model.List[i].id</td>
+
+                                <td style="text-align: center; color: black">@Model.List[i].name</td>
+
+                                <td style="text-align: center; color: black">@Model.List[i].pages</td>
+
+                                <td style="text-align: center; color: black">@Model.List[i].author</td>
+
+                                <td style="text-align: center; color: black">@Model.List[i].quantity</td>
+
+                                <td style="text-align: center; color: black">@Model.List[i].create_date</td>
+
+                                <td style="text-align: center; color: black">@Model.List[i].update_date</td>
+
+                                <td style="width : 110px;">
+
+                                    <div align="center">
+                                        <a href="@Url.Action("Update", "Books", new { Id = @Model.List[i].id })" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar"><span style="color : blue" class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="@Url.Action("Delete", "Books", new { Id = @Model.List[i].id })" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Deletar"><span style="color : red" class="glyphicon glyphicon-remove"></span></a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    }
+   
+</div>
